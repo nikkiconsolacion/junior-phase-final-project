@@ -40,9 +40,9 @@ const syncAndSeed = async()=> {
   const [calpoly, notredame, standford, mit, harvard, yale ] = await Promise.all( schools.map( school => School.create(school)));
 
   let students = [
-    { firstName: 'Nicole', lastName: 'Consolacion', email: 'nikkiconsolacion@gmail.com', GPA: 4.0 },
-    { firstName: 'Foo', lastName: 'Bar', email: 'foobar@gmail.com', GPA: 3.2 },
-    { firstName: 'Bazz', lastName: 'Quq', email: 'bazzquq@gmail.com', GPA: 3.1 }
+    { firstName: 'Nicole', lastName: 'Consolacion', email: 'nikkiconsolacion@gmail.com', GPA: 4.0, schoolId: calpoly.id },
+    { firstName: 'Foo', lastName: 'Bar', email: 'foobar@gmail.com', GPA: 3.2, schoolId: notredame.id },
+    { firstName: 'Bazz', lastName: 'Quq', email: 'bazzquq@gmail.com', GPA: 3.1, schoolId: standford.id }
   ];
   const [ nicole, foo, bazz ] = await Promise.all(students.map( student => Student.create(student)));
 };
