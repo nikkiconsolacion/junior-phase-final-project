@@ -47,12 +47,13 @@ const syncAndSeed = async()=> {
   const [ nicole, foo, bazz ] = await Promise.all(students.map( student => Student.create(student)));
 };
 
-syncAndSeed()
-// module.exports = {
-//   syncAndSeed,
-//   conn,
-//   models: {
-//     School,
-//     Student
-//   }
-// }
+//syncAndSeed()
+
+module.exports = {
+  syncAndSeed,
+  conn,
+  models: {
+    School,
+    Student
+  }
+}
