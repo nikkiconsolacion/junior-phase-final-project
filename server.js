@@ -17,6 +17,16 @@ app.get('/api/schools', async(req, res, next)=> {
   }
 });
 
+app.get('/api/students', async(req, res, next)=> {
+  try {
+    const allStudents = await Student.findAll();
+    res.send(allStudents);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 db.syncAndSeed()
   .then(()=> {
     app.listen(port, ()=> console.log(`listening on port ${port}`))
