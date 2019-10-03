@@ -17,15 +17,18 @@ app.get('/api/schools', async(req, res, next)=> {
   }
 });
 
-app.get('/api/students', async(req, res, next)=> {
+app.post('/api/students', async(req, res, next)=> {
   try {
     const allStudents = await Student.findAll();
-    res.send(allStudents);
+    const newStudent = await Student.findByPk({ where: { id: req.params.id }})
+    res.send([allStudents, newStudent]);
   }
   catch(ex){
     next(ex);
   }
 });
+
+
 
 db.syncAndSeed()
   .then(()=> {
