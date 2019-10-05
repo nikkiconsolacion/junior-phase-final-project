@@ -7,7 +7,7 @@ const _Students = ({ students })=> {
       <div>There are ({ students.length }) students</div>
       <ul>
         {
-          students.map( student => <li key={ student.id}><div>{ student.firstName }</div></li>)
+          students.map( student => <li key={ student.id}><div>{ student.firstName } { student.lastName }</div></li>)
         }
       </ul>
     </div>

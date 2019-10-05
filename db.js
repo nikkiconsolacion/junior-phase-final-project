@@ -18,8 +18,14 @@ const Student = conn.define("student", {
     primaryKey: true,
     defaultValue: UUIDV4
   },
-  firstName: STRING,
-  lastName: STRING,
+  firstName: {
+    type: STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: STRING,
+    allowNull: false
+  },
   email: STRING,
   GPA: DECIMAL
 });
