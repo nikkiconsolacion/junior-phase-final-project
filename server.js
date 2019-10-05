@@ -5,6 +5,8 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use('/dist', express.static(path.join(__dirname, 'dist'))); //important. connects to main.js in index.html
+
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/schools', async(req, res, next)=> {
