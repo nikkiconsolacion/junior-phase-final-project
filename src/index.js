@@ -7,35 +7,10 @@ import { Provider, connect } from 'react-redux';
 
 import Nav from './Nav';
 import Schools from './Schools';
+import Students from './Students';
 
-import store, { fetchSchools } from './store';
+import store, { fetchSchools, fetchStudents } from './store';
 
-class _Students extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      students: []
-    }
-  }
-  async componentDidMount(){
-    const students = (await axios.get('/api/students')).data;
-    this.setState({ students });
-  }
-  render(){
-    const { students } = this.state;
-    return (
-      <div>
-
-        <ul>
-          {
-            students.map( student => <li key={ student.id }>{ student.firstName }</li>)
-          }
-        </ul>
-      </div>
-    )
-  }
-
-}
 
 class App extends React.Component{
   constructor(){
@@ -45,6 +20,7 @@ class App extends React.Component{
   }
   async componentDidMount(){
     store.dispatch(fetchSchools());
+    store.dispatch(fetchStudents());
   }
   render(){
     return (
@@ -52,6 +28,7 @@ class App extends React.Component{
         <HashRouter>
           <Route component={ Nav } />
           <Route exact path='/' component={ Schools } />
+          <Route path='/students' component={ Students } />
         </HashRouter>
       </Provider>
     )
