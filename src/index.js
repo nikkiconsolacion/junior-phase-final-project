@@ -5,6 +5,10 @@ import axios from 'axios';
 import { HashRouter, Link, Route } from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 
+import Nav from './Nav';
+
+import store from './store';
+
 class _Students extends React.Component {
   constructor(){
     super();
@@ -40,9 +44,12 @@ class App extends React.Component{
   }
   render(){
     return (
-      <HashRouter>
-        <Route exact path='/' component={ _Students } />
-      </HashRouter>
+      <Provider store={ store }>
+        <HashRouter>
+          <Route component={ Nav } />
+          <Route exact path='/' component={ _Students } />
+        </HashRouter>
+      </Provider>
     )
   }
 }

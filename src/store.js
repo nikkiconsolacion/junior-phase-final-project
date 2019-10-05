@@ -32,3 +32,4 @@ const addSchool = (school)=> {
   return { type: ADD_SCHOOL, school }
 };
 
+export default store;
