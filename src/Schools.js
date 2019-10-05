@@ -7,7 +7,7 @@ const _Schools = ({ schools })=> {
       <div>There are ({ schools.length }) schools</div>
       <ul>
         {
-          schools.map( school => <li key={ school.id}><div>{ school.name }</div></li>)
+          schools.map( school => <li key={ school.id}><div className='school'>{ school.name }</div></li>)
         }
       </ul>
     </div>

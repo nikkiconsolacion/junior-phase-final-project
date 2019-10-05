@@ -59,6 +59,10 @@ const setStudents = (students)=> {
   };
 }
 
+const addStudent = (student)=> {
+  return { type: ADD_STUDENT, student }
+};
+
 const fetchStudents = ()=> {
   return async(dispatch)=> {
     const students = (await axios.get('/api/students')).data;
@@ -67,4 +71,4 @@ const fetchStudents = ()=> {
 }
 
 export default store;
-export { fetchSchools, fetchStudents };
+export { fetchSchools, fetchStudents, addStudent };

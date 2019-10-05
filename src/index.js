@@ -9,7 +9,7 @@ import Nav from './Nav';
 import Schools from './Schools';
 import Students from './Students';
 
-import store, { fetchSchools, fetchStudents } from './store';
+import store, { fetchSchools, fetchStudents, addStudent } from './store';
 
 
 class App extends React.Component{
