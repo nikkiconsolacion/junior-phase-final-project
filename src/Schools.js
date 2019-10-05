@@ -7,6 +7,11 @@ const _Schools = ({ schools })=> <div>
 
 const mapStateToProps = ({ schools })=> ({ schools });
 
-const Schools = connect(mapStateToProps)(_Schools);
+const Schools = connect(({ schools })=> {
+  return {
+    schools
+  }
+})(_Schools);
+//const Schools = connect(mapStateToProps)(_Schools);
 
 export default Schools;

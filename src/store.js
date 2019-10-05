@@ -32,4 +32,12 @@ const addSchool = (school)=> {
   return { type: ADD_SCHOOL, school }
 };
 
+const fetchSchools = ()=> {
+  return async(dispatch)=> {
+    const schools = (await axios.get('/api/schools')).data;
+    dispatch(setSchools(schools));
+  }
+}
+
 export default store;
+export { fetchSchools };

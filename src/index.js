@@ -7,7 +7,7 @@ import { Provider, connect } from 'react-redux';
 
 import Nav from './Nav';
 
-import store from './store';
+import store, { fetchSchools } from './store';
 
 class _Students extends React.Component {
   constructor(){
@@ -41,6 +41,9 @@ class App extends React.Component{
     super();
     this.state = {
     }
+  }
+  async componentDidMount(){
+    store.dispatch(fetchSchools());
   }
   render(){
     return (
