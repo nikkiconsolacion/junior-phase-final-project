@@ -6,6 +6,7 @@ import { HashRouter, Link, Route } from 'react-router-dom';
 import { Provider, connect } from 'react-redux';
 
 import Nav from './Nav';
+import Schools from './Schools';
 
 import store, { fetchSchools } from './store';
 
@@ -50,7 +51,7 @@ class App extends React.Component{
       <Provider store={ store }>
         <HashRouter>
           <Route component={ Nav } />
-          <Route exact path='/' component={ _Students } />
+          <Route exact path='/' component={ Schools } />
         </HashRouter>
       </Provider>
     )
