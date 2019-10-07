@@ -9,20 +9,20 @@ const SET_STUDENTS = 'SET_STUDENTS';
 
 const schoolReducer = (state = [], action)=> {
   if(action.type === SET_SCHOOLS){
-    state = action.schools;
+    return action.schools;
   }
   if(action.type === ADD_SCHOOL){
-    state = [...state, action.school];
+    return [...state, action.school];
   }
   return state;
 }
 
 const studentReducer = (state = [], action)=> {
   if(action.type === SET_STUDENTS){
-    state = action.students;
+    return action.students;
   }
   if(action.type === ADD_STUDENT){
-    state = [...state, action.student];
+    return [...state, action.student];
   }
   return state;
 }
