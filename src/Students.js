@@ -31,11 +31,6 @@ const _Students = ({ students })=> {
 
 const mapStateToProps = ({ students })=> ({ students });
 
-const Students = connect(({ students })=> {
-  return {
-    students
-  }
-})(_Students);
-//const Students = connect(mapStateToProps)(_Students);
+const Students = connect(mapStateToProps)(_Students);
 
 export default Students;

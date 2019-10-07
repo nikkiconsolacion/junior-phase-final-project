@@ -23,23 +23,18 @@ class _StudentForm extends Component{
       this.setState({ error: ex.response.data.message })
     }
   }
-
   // handleChange = (ev)=> {
   //   this.setState({
   //     [ev.target.name]: ev.target.value
   //   })
   // }
-  // handleSubmit = (ev)=> {
-  //   ev.preventDefault();
-  //   console.log(this.state)
-  // }
+
   render(){
     //console.log('schools', this.props.schools)
     const { create } = this;
     return (
       <form onSubmit={ (ev)=> {
         ev.preventDefault();
-        console.log('state', this.state);
         } }>
         First Name <input type='text' name='firstName' onChange={ (ev)=> this.setState({ firstName: ev.target.value }) }></input><br></br>
         Last Name <input type='text' name='lastName' onChange={ (ev)=> this.setState({ lastName: ev.target.value })}></input><br></br>
@@ -58,12 +53,6 @@ class _StudentForm extends Component{
   }
 }
 
-// const getStudent = ()=> {
-//   return async(dispatch)=> {
-//     addStudent: (student)=>
-//   }
-// }
-
 const mapStateToProps = ({ schools, students })=> {
   return {
     schools,
@@ -78,12 +67,5 @@ const mapDispatchToProps = (dispatch, getState)=> {
 }
 
 const StudentForm = connect(mapStateToProps, mapDispatchToProps)(_StudentForm)
-
-// const StudentForm = connect(({ schools, students })=> {
-//   return {
-//     schools,
-//     students
-//   }
-// })(_StudentForm)
 
 export default StudentForm;
