@@ -36,6 +36,15 @@ app.post('/api/students', async(req, res, next)=> {
     .catch(next)
 });
 
+app.get('/api/students/:id', async(req, res, next)=> {
+  try {
+    const student = await Student.findByPk({ where: { id: req.params.id }});
+    res.send(student);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
 
 
 db.syncAndSeed()

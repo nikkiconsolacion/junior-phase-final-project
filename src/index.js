@@ -30,7 +30,7 @@ class App extends React.Component{
           <Route component={ Nav } />
           <Route component={ StudentForm } />
           <Route exact path='/' component={ Schools } />
-          <Route path='/students' component={ Students } />
+          <Route path='/students/:id?' component={ Students } />
         </HashRouter>
       </Provider>
     )
