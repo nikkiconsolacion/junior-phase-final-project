@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const _Nav = ({ schoolCount, studentCount })=> {
+const _Nav = ({ schoolCount, studentCount, location })=> {
   return (
-    <nav>
+    <header>
       <h1>Acme Schools</h1>
-      <Link to='/'>Schools ({ schoolCount })</Link>
-      <Link to='/students'>Students ({ studentCount })</Link>
-    </nav>
+      <nav>
+        <Link to='/' className={ location.pathname === '/' ? 'selected' : ''}>Schools ({ schoolCount })</Link>
+        <Link to='/students' className={ location.pathname === '/students' ? 'selected' : ''}>Students ({ studentCount })</Link>
+      </nav>
+    </header>
   );
 }
 

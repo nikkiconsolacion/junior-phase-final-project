@@ -5,11 +5,43 @@
       body {
         font-family: Verdana, sans-serif;
       }
-      .schoolDiv {
-        border: 1px solid black;
+      h1 {
+        color:white;
+      }
+      header {
+        display: flex;
+        padding: 1rem;
+        background-color: dodgerBlue;
+        margin-bottom: 1rem;
+      }
+      header a {
+        text-decoration: none;
+        color:white;
+      }
+      header a.selected {
+        font-weight: bold;
+      }
+      nav {
+        flex: 3;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .tiles {
+        display: flex;
+        flex-wrap: wrap;
       }
       .schoolLi {
         list-style: none;
+        border: solid 1px black;
+        border-radius: 1rem;
+        width: calc((100% / 3) - 2rem);
+        margin: 1rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       table {
         border: 1px solid black;
@@ -19,6 +51,15 @@
       }
       .studentTr:hover {
         background-color: aqua;
+      }
+      form {
+        padding: 0.5rem;
+        width: 50%;
+        border: solid 1px black;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
       }
     </style>
   </head>
