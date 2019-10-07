@@ -16,7 +16,7 @@ const _Students = ({ students })=> {
         </thead>
         <tbody>
           {
-            students.map( student => <tr key={ student.id }>
+            students.map( student => <tr key={ student.id } onClick={ ()=> console.log(student.firstName)} className='studentTr'>
                 <td>{ student.firstName }</td>
                 <td>{ student.lastName }</td>
                 <td>{ student.email }</td>
