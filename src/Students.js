@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { deleteStudent } from './store';
 
-const _Students = ({ students, location })=> {
+const _Students = ({ students, location, destroy })=> {
   return (
     <div>
       <div>There are ({ students.length }) students</div>
@@ -24,7 +25,7 @@ const _Students = ({ students, location })=> {
                 <td>{ student.lastName }</td>
                 <td>{ student.email }</td>
                 <td>{ student.GPA }</td>
-                <td><Link to={`/students/${student.id}`}>Delete</Link></td>
+                <td><Link to={`/students/${student.id}`} onClick={ ()=> destroy(student) }>Delete</Link></td>
               </tr>)
           }
         </tbody>
@@ -37,10 +38,10 @@ const mapStateToProps = ({ students, location })=> ({ students });
 
 const mapDispatchToProps = (dispatch, getState)=> {
   return {
-    create: (student)=> dispatch(addStudent(student))
+    destroy: (student)=> dispatch(deleteStudent(student))
   };
 }
 
-const Students = connect(mapStateToProps)(_Students);
+const Students = connect(mapStateToProps, mapDispatchToProps)(_Students);
 
 export default Students;

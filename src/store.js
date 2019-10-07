@@ -1,4 +1,4 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware, bindActionCreators } from 'redux';
 import axios from 'axios';
 import thunks from 'redux-thunk';
 
@@ -6,6 +6,7 @@ const ADD_SCHOOL = 'ADD_SCHOOL';
 const SET_SCHOOLS = 'SET_SCHOOLS';
 const ADD_STUDENT = 'ADD_STUDENT';
 const SET_STUDENTS = 'SET_STUDENTS';
+const DELETE_STUDENT = 'DELETE_STUDENT';
 
 const schoolReducer = (state = [], action)=> {
   if(action.type === SET_SCHOOLS){
@@ -23,6 +24,9 @@ const studentReducer = (state = [], action)=> {
   }
   if(action.type === ADD_STUDENT){
     return [...state, action.student];
+  }
+  if(action.type === DELETE_STUDENT){
+    return state.filter( student => student.id !== action.student.id);
   }
   return state;
 }
@@ -54,6 +58,10 @@ const _addStudent = (student)=> {
   return { type: ADD_STUDENT, student }
 };
 
+const _deleteStudent = (student)=> {
+  return { type: DELETE_STUDENT, student}
+}
+
 const addSchool = (school)=> {
   return { type: ADD_SCHOOL, school }
 };
@@ -82,5 +90,12 @@ const addStudent = (student)=> {
   }
 }
 
+const deleteStudent = (student)=> {
+  return async(dispatch)=> {
+    await axios.delete(`/api/students/${student.id}`, student);
+    return dispatch(_deleteStudent(student));
+  }
+}
+
 export default store;
-export { fetchSchools, fetchStudents, addStudent };
+export { fetchSchools, fetchStudents, addStudent, deleteStudent };

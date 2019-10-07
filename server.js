@@ -46,6 +46,13 @@ app.get('/api/students/:id', async(req, res, next)=> {
   }
 });
 
+app.delete('/api/students/:id', (req, res, next)=> {
+  Student.findByPk(req.params.id)
+    .then( student => student.destroy())
+    .then( ()=> res.sendStatus(204))
+    .catch(next);
+});
+
 
 db.syncAndSeed()
   .then(()=> {
