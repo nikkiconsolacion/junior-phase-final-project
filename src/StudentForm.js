@@ -46,11 +46,13 @@ class _StudentForm extends Component{
   }
 }
 
-const StudentForm = connect(({ schools, students })=> {
+const mapStateToProps = ({ schools, students })=> {
   return {
     schools,
     students
   }
-})(_StudentForm)
+}
+
+const StudentForm = connect(mapStateToProps)(_StudentForm)
 
 export default StudentForm;
