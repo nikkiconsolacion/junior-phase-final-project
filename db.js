@@ -27,7 +27,8 @@ const Student = conn.define("student", {
     allowNull: false
   },
   email: STRING,
-  GPA: DECIMAL
+  GPA: DECIMAL,
+  error: STRING
 });
 
 Student.belongsTo(School);
@@ -51,7 +52,7 @@ const syncAndSeed = async()=> {
     { firstName: 'Bazz', lastName: 'Quq', email: 'bazzquq@gmail.com', GPA: 3.1, schoolId: standford.id },
     { firstName: 'Tommy', lastName: 'Pickles', email: 'tpickles@calpoly.edu', schoolId: calpoly.id}
   ];
-  const [ nicole, foo, bazz, tommy ] = await Promise.all(students.map( student => Student.create(student)));
+  await Promise.all(students.map( student => Student.create(student)));
 };
 
 //syncAndSeed()

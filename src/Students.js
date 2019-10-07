@@ -5,7 +5,8 @@ const _Students = ({ students })=> {
   return (
     <div>
       <div>There are ({ students.length }) students</div>
-      <table>
+      <div>firstName lastName email GPA</div>
+      {/* <table>
         <thead>
           <tr>
             <th>First Name</th>
@@ -17,14 +18,21 @@ const _Students = ({ students })=> {
         <tbody>
           {
             students.map( student => <tr key={ student.id }>
-                <td>{ student.firstName }</td>
-                <td>{ student.lastName }</td>
-                <td>{ student.email }</td>
-                <td>{ student.GPA }</td>
+                <td key={student.id + 'a'}>{ student.firstName }</td>
+                <td key={student.id + 'b'}>{ student.lastName }</td>
+                <td key={student.id + 'c'}>{ student.email }</td>
+                <td key={student.id + 'd'}>{ student.GPA }</td>
               </tr>)
           }
         </tbody>
-      </table>
+      </table> */}
+      <ul>
+        {
+          students.map( student => <li key={ student.id }>
+              { student.firstName } { student.lastName } { student.email } { student.GPA }
+            </li>)
+        }
+      </ul>
     </div>
   )
 }

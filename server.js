@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use('/dist', express.static(path.join(__dirname, 'dist'))); //important. connects to main.js in index.html
+app.use(express.json()); //important!
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
@@ -30,14 +31,18 @@ app.get('/api/students', async(req, res, next)=> {
 });
 
 app.post('/api/students', async(req, res, next)=> {
-  try {
-    const allStudents = await Student.findAll();
-    const newStudent = await Student.findByPk({ where: { id: req.params.id }})
-    res.send([allStudents, newStudent]);
-  }
-  catch(ex){
-    next(ex);
-  }
+  console.log('req.body', req.body);
+  // try {
+  //   const allStudents = await Student.findAll();
+  //   const newStudent = await Student.create({...req.body})
+  //   res.send([allStudents, newStudent]);
+  // }
+  // catch(ex){
+  //   next(ex);
+  // }
+  Student.create({...req.body })
+    .then( student => res.status(201).send(student))
+    .catch(next)
 });
 
 

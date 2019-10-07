@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import axios from 'axios';
-import thunk from 'redux-thunk';
+import thunks from 'redux-thunk';
 
 const ADD_SCHOOL = 'ADD_SCHOOL';
 const SET_SCHOOLS = 'SET_SCHOOLS';
@@ -32,24 +32,15 @@ const reducer = combineReducers({
   students: studentReducer
 });
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunks));
+
+//action creators
 
 const setSchools = (schools)=> {
   return {
     type: SET_SCHOOLS,
     schools
   };
-}
-
-const addSchool = (school)=> {
-  return { type: ADD_SCHOOL, school }
-};
-
-const fetchSchools = ()=> {
-  return async(dispatch)=> {
-    const schools = (await axios.get('/api/schools')).data;
-    dispatch(setSchools(schools));
-  }
 }
 
 const setStudents = (students)=> {
@@ -59,14 +50,36 @@ const setStudents = (students)=> {
   };
 }
 
-const addStudent = (student)=> {
+const _addStudent = (student)=> {
   return { type: ADD_STUDENT, student }
 };
+
+const addSchool = (school)=> {
+  return { type: ADD_SCHOOL, school }
+};
+
+//thunks
+
+const fetchSchools = ()=> {
+  return async(dispatch)=> {
+    const schools = (await axios.get('/api/schools')).data;
+    dispatch(setSchools(schools));
+  }
+}
 
 const fetchStudents = ()=> {
   return async(dispatch)=> {
     const students = (await axios.get('/api/students')).data;
     dispatch(setStudents(students));
+  }
+}
+
+const addStudent = (student)=> {
+  return async(dispatch, getState)=> {
+    console.log('student', student)
+    const created = (await axios.post('/api/students', student)).data;
+    console.log('created', created);
+    return dispatch(_addStudent(created))
   }
 }
 

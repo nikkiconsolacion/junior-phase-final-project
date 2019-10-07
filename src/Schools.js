@@ -17,14 +17,8 @@ const _Schools = ({ schools, students })=> {
   )
 }
 
-const mapStateToProps = ({ schools })=> ({ schools });
+const mapStateToProps = ({ schools, students })=> ({ schools, students });
 
-const Schools = connect(({ schools, students })=> {
-  return {
-    schools,
-    students
-  }
-})(_Schools);
-//const Schools = connect(mapStateToProps)(_Schools);
+const Schools = connect(mapStateToProps)(_Schools);
 
 export default Schools;
