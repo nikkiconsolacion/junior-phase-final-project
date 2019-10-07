@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class StudentForm extends Component{
+class _StudentForm extends Component{
   constructor(){
     super();
     this.state = {
-      firstname: '',
-      lastname: ''
+      firstName: '',
+      lastName: '',
+      email: '',
+      GPA: null,
+      schoolId: null
     }
   }
+
   // handleChange = (ev)=> {
   //   this.setState({
   //     [ev.target.name]: ev.target.value
@@ -18,36 +23,34 @@ class StudentForm extends Component{
   //   console.log(this.state)
   // }
   render(){
+    //console.log('schools', this.props.schools)
     return (
-      // <div>
-      //   <form onSubmit={ this.handleSubmit }>
-      //     <div>
-      //       First Name <input type='text' name='firstname' onChange={ this.handleChange }></input>
-      //     </div>
-      //     <div>
-      //       Last Name <input type='text' name='lastname' onChange={ this.handleChange }></input>
-      //     </div>
-      //     <button>Save</button>
-      //   </form>
-      // </div>
-      <form>
-        First Name <input type='text' name='firstname'></input><br></br>
-        Last Name <input type='text' name='lastname'></input><br></br>
-        Email <input type='email' name='email'></input><br></br>
-        GPA <input type='number' name='gpa'></input><br></br>
-        Enroll at: <select name='schools'>
+      <form onSubmit={ (ev)=> {
+        ev.preventDefault();
+        console.log('state', this.state);
+        } }>
+        First Name <input type='text' name='firstname' onChange={ (ev)=> this.setState({ firstName: ev.target.value })}></input><br></br>
+        Last Name <input type='text' name='lastname' onChange={ (ev)=> this.setState({ lastName: ev.target.value })}></input><br></br>
+        Email <input type='email' name='email' onChange={ (ev)=> this.setState({ email: ev.target.value })}></input><br></br>
+        GPA <input type='number' step='0.01' name='gpa' onChange={ (ev)=> this.setState({ GPA: ev.target.value })}></input><br></br>
+        Enroll at: <select name='schools' onChange={ (ev)=> this.setState({ schoolId: ev.target.value })}>
           <option value='notEnrolled'>--Not Enrolled--</option>
-          <option value='calpoly'>Cal Poly</option>
-          <option value='notredame'>Notre Dame</option>
-          <option value='stanford'>Stanford</option>
-          <option value='mit'>MIT</option>
-          <option value='harvard'>Harvard</option>
-          <option value='yale'>Yale</option>
+          {
+            this.props.schools.map( school => <option key={school.id} value={ school.id}>{ school.name }</option>)
+          }
+
         </select><br></br>
         <button>Save</button>
       </form>
     );
   }
 }
+
+const StudentForm = connect(({ schools, students })=> {
+  return {
+    schools,
+    students
+  }
+})(_StudentForm)
 
 export default StudentForm;
