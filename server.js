@@ -31,15 +31,6 @@ app.get('/api/students', async(req, res, next)=> {
 });
 
 app.post('/api/students', async(req, res, next)=> {
-  console.log('req.body', req.body);
-  // try {
-  //   const allStudents = await Student.findAll();
-  //   const newStudent = await Student.create({...req.body})
-  //   res.send([allStudents, newStudent]);
-  // }
-  // catch(ex){
-  //   next(ex);
-  // }
   Student.create({...req.body })
     .then( student => res.status(201).send(student))
     .catch(next)

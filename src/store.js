@@ -76,7 +76,6 @@ const fetchStudents = ()=> {
 
 const addStudent = (student)=> {
   return async(dispatch, getState)=> {
-    console.log('student', student)
     const created = (await axios.post('/api/students', student)).data;
     console.log('created', created);
     return dispatch(_addStudent(created))
