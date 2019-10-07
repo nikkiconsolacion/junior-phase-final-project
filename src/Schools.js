@@ -7,7 +7,7 @@ const _Schools = ({ schools, students })=> {
       <div>There are ({ schools.length }) schools</div>
       <ul>
         {
-          schools.map( school => <li key={ school.id}><div className='school'>
+          schools.map( school => <li className='schoolLi' key={ school.id}><div className='schoolDiv'>
             { school.name }
               <div>Student Count { students.filter( student => student.schoolId === school.id ).length}</div>
             </div></li>)
