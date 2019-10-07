@@ -48,9 +48,10 @@ const syncAndSeed = async()=> {
   let students = [
     { firstName: 'Nicole', lastName: 'Consolacion', email: 'nikkiconsolacion@gmail.com', GPA: 4.0, schoolId: calpoly.id },
     { firstName: 'Foo', lastName: 'Bar', email: 'foobar@gmail.com', GPA: 3.2, schoolId: notredame.id },
-    { firstName: 'Bazz', lastName: 'Quq', email: 'bazzquq@gmail.com', GPA: 3.1, schoolId: standford.id }
+    { firstName: 'Bazz', lastName: 'Quq', email: 'bazzquq@gmail.com', GPA: 3.1, schoolId: standford.id },
+    { firstName: 'Tommy', lastName: 'Pickles', email: 'tpickles@calpoly.edu', schoolId: calpoly.id}
   ];
-  const [ nicole, foo, bazz ] = await Promise.all(students.map( student => Student.create(student)));
+  const [ nicole, foo, bazz, tommy ] = await Promise.all(students.map( student => Student.create(student)));
 };
 
 //syncAndSeed()

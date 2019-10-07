@@ -8,6 +8,7 @@ import { Provider, connect } from 'react-redux';
 import Nav from './Nav';
 import Schools from './Schools';
 import Students from './Students';
+import StudentForm from './StudentForm';
 
 import store, { fetchSchools, fetchStudents, addStudent } from './store';
 
@@ -27,6 +28,7 @@ class App extends React.Component{
       <Provider store={ store }>
         <HashRouter>
           <Route component={ Nav } />
+          <Route component={ StudentForm } />
           <Route exact path='/' component={ Schools } />
           <Route path='/students' component={ Students } />
         </HashRouter>
