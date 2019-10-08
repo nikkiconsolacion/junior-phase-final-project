@@ -38,7 +38,7 @@ app.post('/api/students', async(req, res, next)=> {
 
 app.get('/api/students/:id', async(req, res, next)=> {
   try {
-    const student = await Student.findByPk({ where: { id: req.params.id }});
+    const student = await Student.findByPk(req.params.id);
     res.send(student);
   }
   catch(ex){
@@ -48,7 +48,7 @@ app.get('/api/students/:id', async(req, res, next)=> {
 
 app.put('/api/students/:id', async(req, res, next)=> {
   try {
-    const student = await Student.findByPk({ where: { id: req.params.id }});
+    const student = await Student.findByPk(req.params.id);
     res.send(student);
   }
   catch(ex){
