@@ -7,6 +7,7 @@ import { Provider, connect } from 'react-redux';
 
 import Nav from './Nav';
 import Schools from './Schools';
+import School from './School';
 import Students from './Students';
 import StudentForm from './StudentForm';
 
@@ -22,6 +23,7 @@ class App extends React.Component{
   async componentDidMount(){
     store.dispatch(fetchSchools());
     store.dispatch(fetchStudents());
+    //store.dispatch(fetchSchool());
   }
   render(){
     return (
@@ -31,6 +33,7 @@ class App extends React.Component{
           <Route component={ StudentForm } />
           <Route exact path='/' component={ Schools } />
           <Route path='/students/:id?' component={ Students } />
+          <Route path='/schools/:id' component={ School } />
         </HashRouter>
       </Provider>
     )

@@ -3,6 +3,7 @@ import axios from 'axios';
 import thunks from 'redux-thunk';
 
 const SET_SCHOOLS = 'SET_SCHOOLS';
+//const SET_SCHOOL = 'SET_SCHOOL';
 const ADD_STUDENT = 'ADD_STUDENT';
 const SET_STUDENTS = 'SET_STUDENTS';
 const DELETE_STUDENT = 'DELETE_STUDENT';
@@ -12,6 +13,9 @@ const schoolReducer = (state = [], action)=> {
   if(action.type === SET_SCHOOLS){
     return action.schools;
   }
+  // if(action.type === SET_SCHOOL){
+  //   return action.school;
+  // }
   return state;
 }
 
@@ -26,8 +30,6 @@ const studentReducer = (state = [], action)=> {
     return state.filter( student => student.id !== action.student.id);
   }
   if(action.type === UPDATE_STUDENT){
-    // const students = state.filter( student => student.id !== action.student.id);
-    // return [...students, action.student ]
     return state.map( student => {
       if( student.id === action.student.id){
         return action.student;
@@ -54,6 +56,13 @@ const setSchools = (schools)=> {
     schools
   };
 }
+
+// const setSchool = (school)=> {
+//   return {
+//     type: SET_SCHOOL,
+//     school
+//   }
+// }
 
 const setStudents = (students)=> {
   return {
@@ -82,6 +91,13 @@ const fetchSchools = ()=> {
     dispatch(setSchools(schools));
   }
 }
+
+// const fetchSchool = (school)=> {
+//   return async(dispatch)=> {
+//     const _school = (await axios.get(`/schools/${school.id}`)).data;
+//     dispatch(setSchool(_school));
+//   }
+// }
 
 const fetchStudents = ()=> {
   return async(dispatch)=> {

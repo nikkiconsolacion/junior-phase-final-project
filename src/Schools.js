@@ -10,7 +10,7 @@ const _Schools = ({ schools, students })=> {
       <ul className='tiles'>
         {
           schools.map( school => <li className='schoolLi' key={ school.id}><div className='schoolDiv'>
-            { school.name }
+            <div><Link to={`/schools/${school.id}`} onClick={ ()=> console.log(school.name) }>{ school.name }</Link></div>
               <div>Student Count { students.filter( student => student.schoolId === school.id ).length}</div>
             </div></li>)
         }
