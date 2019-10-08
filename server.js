@@ -31,12 +31,22 @@ app.get('/api/students', async(req, res, next)=> {
 });
 
 app.post('/api/students', async(req, res, next)=> {
-  Student.create({...req.body })
+  Student.create(req.body)
     .then( student => res.status(201).send(student))
     .catch(next)
 });
 
 app.get('/api/students/:id', async(req, res, next)=> {
+  try {
+    const student = await Student.findByPk({ where: { id: req.params.id }});
+    res.send(student);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.put('/api/students/:id', async(req, res, next)=> {
   try {
     const student = await Student.findByPk({ where: { id: req.params.id }});
     res.send(student);

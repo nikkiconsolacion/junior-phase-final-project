@@ -2,18 +2,15 @@ import { combineReducers, createStore, applyMiddleware, bindActionCreators } fro
 import axios from 'axios';
 import thunks from 'redux-thunk';
 
-const ADD_SCHOOL = 'ADD_SCHOOL';
 const SET_SCHOOLS = 'SET_SCHOOLS';
 const ADD_STUDENT = 'ADD_STUDENT';
 const SET_STUDENTS = 'SET_STUDENTS';
 const DELETE_STUDENT = 'DELETE_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
 const schoolReducer = (state = [], action)=> {
   if(action.type === SET_SCHOOLS){
     return action.schools;
-  }
-  if(action.type === ADD_SCHOOL){
-    return [...state, action.school];
   }
   return state;
 }
@@ -27,6 +24,17 @@ const studentReducer = (state = [], action)=> {
   }
   if(action.type === DELETE_STUDENT){
     return state.filter( student => student.id !== action.student.id);
+  }
+  if(action.type === UPDATE_STUDENT){
+    // const students = state.filter( student => student.id !== action.student.id);
+    // return [...students, action.student ]
+    return state.map( student => {
+      if( student.id === action.student.id){
+        return action.student;
+      } else {
+        return student;
+      }
+    })
   }
   return state;
 }
@@ -62,9 +70,9 @@ const _deleteStudent = (student)=> {
   return { type: DELETE_STUDENT, student}
 }
 
-const addSchool = (school)=> {
-  return { type: ADD_SCHOOL, school }
-};
+const _updateStudent = (student)=> {
+  return { type: UPDATE_STUDENT, student }
+}
 
 //thunks
 
@@ -97,5 +105,12 @@ const deleteStudent = (student)=> {
   }
 }
 
+const updateStudent = (student)=> {
+  return async(dispatch)=> {
+    const _student = (await axios.put(`/api/students/${student.id}`)).data;
+    return dispatch(_updateStudent(_student));
+  }
+}
+
 export default store;
-export { fetchSchools, fetchStudents, addStudent, deleteStudent };
+export { fetchSchools, fetchStudents, addStudent, deleteStudent, updateStudent };
