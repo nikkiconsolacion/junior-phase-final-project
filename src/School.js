@@ -22,6 +22,23 @@ const _School = ({ schools, students, match, destroy, update })=> {
             _students.map( student => <li key={student.id}>
               <div><b>{ student.firstName } { student.lastName }</b></div>
               <div>GPA: { student.GPA }</div>
+              <form>
+                <select onChange={ (ev)=> {
+                  console.log('student before change', student);
+                  if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
+                    update({ ...student, schoolId: ev.target.value })
+                  }
+                  if (student.id !== undefined && ev.target.value === 'notEnrolled') {
+                    update({ ...student, schoolId: null })
+                  }
+                }}>
+                  <option value={null}>--Select School--</option>
+                  <option value='notEnrolled'>Not Enrolled</option>
+                  {
+                    schools.map( school => <option key={school.id} value={ school.id}>{ school.name }</option>)
+                  }
+                </select>
+              </form>
               <div><button onClick={ ()=> destroy(student) }>Destroy Student</button></div>
             </li>)
           }
@@ -32,6 +49,7 @@ const _School = ({ schools, students, match, destroy, update })=> {
 }
 
 const mapStateToProps = ({ schools, students })=> {
+
   return {
     schools,
     students

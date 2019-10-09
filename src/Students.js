@@ -18,11 +18,15 @@ const _Students = ({ students, _students, schools, location, destroy, update })=
             <form>
               <select onChange={ (ev)=> {
                 console.log('student before change', student);
-                student.id !== undefined ? update({ ...student, schoolId: ev.target.value, enrolledAt: schools.find( school => school.id === ev.target.value) }) : null;
-
+                if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
+                  update({ ...student, schoolId: ev.target.value })
+                }
+                if (student.id !== undefined && ev.target.value === 'notEnrolled') {
+                  update({ ...student, schoolId: null })
+                }
               }}>
                 <option value={null}>--Select School--</option>
-                <option value={null}>Not Enrolled</option>
+                <option value='notEnrolled'>Not Enrolled</option>
                 {
                   schools.map( school => <option key={school.id} value={ school.id}>{ school.name }</option>)
                 }
@@ -36,6 +40,7 @@ const _Students = ({ students, _students, schools, location, destroy, update })=
     </div>
   )
 }
+//enrolledAt: schools.find( school => school.id === ev.target.value) // was in update()
 
 const mapStateToProps = ({ students, schools })=> {
   const _students = students.map( student => {
