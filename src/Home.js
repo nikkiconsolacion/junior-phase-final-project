@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const _Home = ({ _schoolsWithGPA, popularSchool, maxEnrolled, topSchool })=> {
   if (_schoolsWithGPA.length === 0 || maxEnrolled === 0) {
@@ -11,8 +12,8 @@ const _Home = ({ _schoolsWithGPA, popularSchool, maxEnrolled, topSchool })=> {
     return (
       <div>
         <h3>Home</h3>
-        <div>Our Most Popular school is { popularSchool.name } with { popularSchool.enrolled.length } students.</div>
-        <div>Our top performing school is { topSchool.name } with an average GPA of { topSchool.averageGPA }</div>
+        <div>Our Most Popular school is <Link to={`/schools/${popularSchool.id}`}>{ popularSchool.name }</Link> with { popularSchool.enrolled.length } students.</div>
+        <div>Our top performing school is <Link to={`/schools/${topSchool.id}`}>{ topSchool.name }</Link> with an average GPA of { topSchool.averageGPA }</div>
       </div>
     );
   }
