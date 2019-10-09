@@ -56,11 +56,16 @@ app.get('/api/students/:id', async(req, res, next)=> {
 });
 
 app.put('/api/students/:id', async(req, res, next)=> {
+  // const student = await Student.findByPk(req.params.id);
+  // Student.update(student, req.body)
+  //   .then( student => res.status(200).send(student))
+  //   .catch(next)
+  const student = await Student.findByPk(req.params.id);
   try {
-    const student = await Student.findByPk(req.params.id);
-    res.send(student);
+    const updatedStudent = await Student.update(req.body, { where: { id: req.params.id }, returning: true });
+    res.send(updatedStudent);
   }
-  catch(ex){
+  catch(ex) {
     next(ex);
   }
 });

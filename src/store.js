@@ -106,8 +106,10 @@ const deleteStudent = (student)=> {
 
 const updateStudent = (student)=> {
   return async(dispatch)=> {
-    const _student = (await axios.put(`/api/students/${student.id}`)).data;
-    return dispatch(_updateStudent(_student));
+    console.log('student after change', student)
+    const updatedStudent = await axios.put(`/api/students/${student.id}`, student);
+    console.log('updated student in thunks', updatedStudent)
+    return dispatch(_updateStudent(updatedStudent));
   }
 }
 
