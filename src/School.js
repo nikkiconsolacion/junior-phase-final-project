@@ -51,7 +51,7 @@ const _School = ({ schools, students, match, destroy, update, unenrolledStudents
                   }
                 </select>
               </form>
-              <div><button onClick={ ()=> destroy(student) }>Destroy Student</button></div>
+              <div><button className='destroyButton' onClick={ ()=> destroy(student) }>Destroy Student</button></div>
             </li>)
           }
         </ul>

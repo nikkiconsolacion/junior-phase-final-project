@@ -34,7 +34,7 @@ class _StudentForm extends Component{
     //console.log('schools', this.props.schools)
     const { create, handleChange } = this;
     return (
-      <form className='studentForm' onSubmit={ (ev)=> ev.preventDefault() }>
+      <form id='studentForm' onSubmit={ (ev)=> ev.preventDefault()}>
         First Name <input type='text' name='firstName' onChange={ (ev)=> handleChange(ev) }></input><br></br>
         Last Name <input type='text' name='lastName' onChange={ (ev)=> handleChange(ev) }></input><br></br>
         Email <input type='email' name='email' onChange={ (ev)=> handleChange(ev) }></input><br></br>
