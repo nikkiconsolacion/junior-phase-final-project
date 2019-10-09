@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { deleteStudent, updateStudent } from './store';
-import { ECANCELED } from 'constants';
 
 const _Students = ({ students, _students, schools, location, destroy, update })=> {
   return (
@@ -22,7 +21,6 @@ const _Students = ({ students, _students, schools, location, destroy, update })=
                 student.id !== undefined ? update({ ...student, schoolId: ev.target.value, enrolledAt: schools.find( school => school.id === ev.target.value) }) : null;
 
               }}>
-                {/* <option value={ student === undefined || student.schoolId === null ? undefined : student.enrolledAt.id }>{ student.enrolledAt !== undefined ? student.enrolledAt.name : 'Not Enrolled' }</option> */}
                 <option value={null}>--Select School--</option>
                 <option value={null}>Not Enrolled</option>
                 {

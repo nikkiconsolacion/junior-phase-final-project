@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { updateStudent } from './store';
 
 
-const _Schools = ({ schools, students })=> {
+const _Schools = ({ schools, students, update })=> {
   return (
     <div>
       <div>There are ({ schools.length }) schools</div>
@@ -17,6 +18,19 @@ const _Schools = ({ schools, students })=> {
                 <div>
                   Student Count { students.filter( student => student.schoolId === school.id ).length}
                 </div>
+                <form>
+                  <select onChange={ (ev)=> {
+                    console.log('student before change', student);
+                    student.id !== undefined ? update({ ...student, schoolId: ev.target.value, enrolledAt: schools.find( school => school.id === ev.target.value) }) : null;
+
+                  }}>
+                    <option value={null}>--Select School--</option>
+                    <option value={null}>Not Enrolled</option>
+                    {
+                      schools.map( school => <option key={school.id} value={ school.id}>{ school.name }</option>)
+                    }
+                  </select>
+                </form>
               </div>
             </li>)
         }
@@ -25,8 +39,19 @@ const _Schools = ({ schools, students })=> {
   )
 }
 
-const mapStateToProps = ({ schools, students })=> ({ schools, students });
+const mapStateToProps = ({ schools, students })=> {
+  return {
+    schools,
+    students
+  }
+}
 
-const Schools = connect(mapStateToProps)(_Schools);
+const mapDispatchToProps = (dispatch, getState)=> {
+  return {
+    update: (student)=> dispatch(updateStudent(student))
+  };
+}
+
+const Schools = connect(mapStateToProps, mapDispatchToProps)(_Schools);
 
 export default Schools;

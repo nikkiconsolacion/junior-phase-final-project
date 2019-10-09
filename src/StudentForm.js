@@ -33,7 +33,7 @@ class _StudentForm extends Component{
     //console.log('schools', this.props.schools)
     const { create } = this;
     return (
-      <form onSubmit={ (ev)=> ev.preventDefault() }>
+      <form className='studentForm' onSubmit={ (ev)=> ev.preventDefault() }>
         First Name <input type='text' name='firstName' onChange={ (ev)=> this.setState({ firstName: ev.target.value }) }></input><br></br>
         Last Name <input type='text' name='lastName' onChange={ (ev)=> this.setState({ lastName: ev.target.value })}></input><br></br>
         Email <input type='email' name='email' onChange={ (ev)=> this.setState({ email: ev.target.value })}></input><br></br>
