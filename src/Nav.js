@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 const _Nav = ({ schoolCount, studentCount, location })=> {
   return (
     <header>
-      <h1>Acme Schools</h1>
       <nav>
-        <Link to='/' className={ location.pathname === '/' ? 'selected' : ''}>Schools ({ schoolCount })</Link>
+        <Link to='/' className={ location.pathname === '/' ? 'selected' : ''}><h1>Acme Schools</h1></Link>
+        <Link to='/schools' className={ location.pathname === '/' ? 'selected' : ''}>Schools ({ schoolCount })</Link>
         <Link to='/students' className={ location.pathname === '/students' ? 'selected' : ''}>Students ({ studentCount })</Link>
       </nav>
     </header>
