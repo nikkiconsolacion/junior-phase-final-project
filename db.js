@@ -61,7 +61,9 @@ const syncAndSeed = async()=> {
     { firstName: 'Chandler', lastName: 'Bing', email: 'misschanandlerbong@gmail.com', GPA: 3.7, schoolId: standford.id },
     { firstName: 'Phoebe', lastName: 'Buffet', email: 'pheebs@gmail.com', GPA: 2.5},
     { firstName: 'Ross', lastName: 'Gellar', email: 'dinosaursrock@gmail.com', GPA: 4.0},
-    { firstName: 'Monica', lastName: 'Gellar', email: 'crazychef@gmail.com', GPA: 3.8}
+    { firstName: 'Monica', lastName: 'Gellar', email: 'crazychef@gmail.com', GPA: 3.8},
+    { firstName: 'Joey', lastName: 'Tribiani', email: 'howyoudoin@gmail.com', GPA: 2.0},
+    { firstName: 'Rachel', lastName: 'Green', email: 'rgreen@gmail.com', GPA: 2.5}
   ];
   await Promise.all(students.map( student => Student.create(student)));
 };

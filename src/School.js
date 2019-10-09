@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteStudent, updateStudent } from './store';
 
-const _School = ({ schools, students, match, destroy, update })=> {
+const _School = ({ schools, students, match, destroy, update, unenrolledStudents })=> {
   const schoolId = match.params.id
   let school;
 
@@ -17,6 +17,18 @@ const _School = ({ schools, students, match, destroy, update })=> {
     return (
       <div>
         <h3>{school.name} ({ _students.length } Students enrolled)</h3>
+        <form>
+          <select onChange={ (ev)=> {
+            const student = students.find(student => student.id === ev.target.value);
+            const newSchool = schools.find( _school => school.id === _school.id);
+            update({ ...student, schoolId: newSchool.id })
+          }}>
+            <option value='addStudent'>--Add Student--</option>
+            {
+              unenrolledStudents.map( student => <option key={student.id} value={ student.id} name={ student.id}>{ student.firstName } { student.lastName }</option>)
+            }
+          </select>
+        </form>
         <ul className='tiles'>
           {
             _students.map( student => <li key={student.id}>
@@ -49,10 +61,11 @@ const _School = ({ schools, students, match, destroy, update })=> {
 }
 
 const mapStateToProps = ({ schools, students })=> {
-
+  const unenrolledStudents = students.filter( student => student.schoolId === null);
   return {
     schools,
-    students
+    students,
+    unenrolledStudents
   }
 };
 
