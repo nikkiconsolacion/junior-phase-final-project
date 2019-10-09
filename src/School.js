@@ -36,7 +36,7 @@ const _School = ({ schools, students, match, destroy, update, unenrolledStudents
               <div>GPA: { student.GPA }</div>
               <form>
                 <select onChange={ (ev)=> {
-                  console.log('student before change', student);
+                  //console.log('student before change', student);
                   if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
                     update({ ...student, schoolId: ev.target.value })
                   }
@@ -69,7 +69,7 @@ const mapStateToProps = ({ schools, students })=> {
   }
 };
 
-const mapDispatchToProps = (dispatch, getState)=> {
+const mapDispatchToProps = (dispatch)=> {
   return {
     destroy: (student)=> dispatch(deleteStudent(student)),
     update: (student)=> dispatch(updateStudent(student))

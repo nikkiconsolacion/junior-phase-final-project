@@ -40,7 +40,6 @@ const _Schools = ({ schools, students, update, unenrolledStudents })=> {
 
 const mapStateToProps = ({ schools, students })=> {
   const unenrolledStudents = students.filter( student => student.schoolId === null);
-
   return {
     schools,
     students,
@@ -48,7 +47,7 @@ const mapStateToProps = ({ schools, students })=> {
   }
 }
 
-const mapDispatchToProps = (dispatch, getState)=> {
+const mapDispatchToProps = (dispatch)=> {
   return {
     update: (student)=> dispatch(updateStudent(student))
   };

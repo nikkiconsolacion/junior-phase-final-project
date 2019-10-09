@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { deleteStudent, updateStudent } from './store';
 
-const _Students = ({ students, _students, schools, location, destroy, update })=> {
+const _Students = ({ students, _students, schools, destroy, update })=> {
   return (
     <div>
       <div>There are ({ students.length }) students</div>
@@ -17,7 +15,7 @@ const _Students = ({ students, _students, schools, location, destroy, update })=
             <div>attends: { student.schoolId !== null ? student.enrolledAt.name : 'Not enrolled'}</div>
             <form>
               <select onChange={ (ev)=> {
-                console.log('student before change', student);
+                //console.log('student before change', student);
                 if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
                   update({ ...student, schoolId: ev.target.value })
                 }
@@ -40,7 +38,6 @@ const _Students = ({ students, _students, schools, location, destroy, update })=
     </div>
   )
 }
-//enrolledAt: schools.find( school => school.id === ev.target.value) // was in update()
 
 const mapStateToProps = ({ students, schools })=> {
   const _students = students.map( student => {

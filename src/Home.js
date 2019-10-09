@@ -42,7 +42,6 @@ const mapStateToProps = ({ schools, students })=> {
     }
     return {...school, averageGPA }
   });
-  //console.log('_schoolsWithGPA', _schoolsWithGPA);
   let gpaArr = [];
   _schoolsWithGPA.forEach( school => gpaArr.push(school.averageGPA));
   const maxGPA = gpaArr.reduce((acc, curr)=> curr > acc ? curr : acc, 0);

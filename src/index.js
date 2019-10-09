@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 
-import { HashRouter, Link, Route } from 'react-router-dom';
-import { Provider, connect } from 'react-redux';
+import { HashRouter, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import Nav from './Nav';
 import Home from './Home';
