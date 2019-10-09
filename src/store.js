@@ -2,20 +2,17 @@ import { combineReducers, createStore, applyMiddleware, bindActionCreators } fro
 import axios from 'axios';
 import thunks from 'redux-thunk';
 
+//constants
 const SET_SCHOOLS = 'SET_SCHOOLS';
-//const SET_SCHOOL = 'SET_SCHOOL';
 const ADD_STUDENT = 'ADD_STUDENT';
 const SET_STUDENTS = 'SET_STUDENTS';
 const DELETE_STUDENT = 'DELETE_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
-const schoolReducer = (state = [], action)=> {
+const schoolsReducer = (state = [], action)=> {
   if(action.type === SET_SCHOOLS){
     return action.schools;
   }
-  // if(action.type === SET_SCHOOL){
-  //   return action.school;
-  // }
   return state;
 }
 
@@ -42,7 +39,7 @@ const studentReducer = (state = [], action)=> {
 }
 
 const reducer = combineReducers({
-  schools: schoolReducer,
+  schools: schoolsReducer,
   students: studentReducer
 });
 
@@ -56,13 +53,6 @@ const setSchools = (schools)=> {
     schools
   };
 }
-
-// const setSchool = (school)=> {
-//   return {
-//     type: SET_SCHOOL,
-//     school
-//   }
-// }
 
 const setStudents = (students)=> {
   return {
@@ -88,21 +78,14 @@ const _updateStudent = (student)=> {
 const fetchSchools = ()=> {
   return async(dispatch)=> {
     const schools = (await axios.get('/api/schools')).data;
-    dispatch(setSchools(schools));
+    return dispatch(setSchools(schools));
   }
 }
-
-// const fetchSchool = (school)=> {
-//   return async(dispatch)=> {
-//     const _school = (await axios.get(`/schools/${school.id}`)).data;
-//     dispatch(setSchool(_school));
-//   }
-// }
 
 const fetchStudents = ()=> {
   return async(dispatch)=> {
     const students = (await axios.get('/api/students')).data;
-    dispatch(setStudents(students));
+    return dispatch(setStudents(students));
   }
 }
 

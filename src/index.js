@@ -23,7 +23,6 @@ class App extends React.Component{
   async componentDidMount(){
     store.dispatch(fetchSchools());
     store.dispatch(fetchStudents());
-    //store.dispatch(fetchSchool());
   }
   render(){
     return (

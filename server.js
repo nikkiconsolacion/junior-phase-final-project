@@ -19,7 +19,7 @@ app.get('/api/schools', async(req, res, next)=> {
     next(ex);
   }
 });
-app.get('/schools/:id', async(req, res, next)=> {
+app.get('/api/schools/:id', async(req, res, next)=> {
   try {
     const school = await School.findByPk(req.params.id);
     res.send(school);
