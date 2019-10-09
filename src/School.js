@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteStudent, updateStudent } from './store';
 
-const _School = ({ schools, students, match })=> {
+const _School = ({ schools, students, match, destroy, update })=> {
   const schoolId = match.params.id
   let school;
 
@@ -12,16 +13,38 @@ const _School = ({ schools, students, match })=> {
   }
   else {
     school = schools.find( school => school.id === schoolId);
+    const _students = students.filter( student => student.schoolId === school.id);
     return (
       <div>
-        <h3>{school.name} ({ students.filter( student => student.schoolId === schoolId).length } Students enrolled)</h3>
+        <h3>{school.name} ({ _students.length } Students enrolled)</h3>
+        <ul className='tiles'>
+          {
+            _students.map( student => <li key={student.id}>
+              <div><b>{ student.firstName } { student.lastName }</b></div>
+              <div>GPA: { student.GPA }</div>
+              <div><button onClick={ ()=> destroy(student) }>Destroy Student</button></div>
+            </li>)
+          }
+        </ul>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ schools, students })=> ({ schools, students });
+const mapStateToProps = ({ schools, students })=> {
+  return {
+    schools,
+    students
+  }
+};
 
-const School = connect(mapStateToProps)(_School);
+const mapDispatchToProps = (dispatch, getState)=> {
+  return {
+    destroy: (student)=> dispatch(deleteStudent(student)),
+    update: (student)=> dispatch(updateStudent(student))
+  };
+}
+
+const School = connect(mapStateToProps, mapDispatchToProps)(_School);
 
 export default School;
