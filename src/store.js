@@ -33,7 +33,7 @@ const studentReducer = (state = [], action)=> {
       } else {
         return student;
       }
-    })
+    });
   }
   return state;
 }
@@ -106,8 +106,8 @@ const deleteStudent = (student)=> {
 
 const updateStudent = (student)=> {
   return async(dispatch)=> {
-    console.log('student after change', student)
-    const updatedStudent = await axios.put(`/api/students/${student.id}`, student);
+    console.log('student after change in thunks', student)
+    const updatedStudent = (await axios.put(`/api/students/${student.id}`, student)).data[1][0];
     console.log('updated student in thunks', updatedStudent)
     return dispatch(_updateStudent(updatedStudent));
   }

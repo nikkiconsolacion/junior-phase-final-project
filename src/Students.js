@@ -12,15 +12,17 @@ const _Students = ({ students, _students, schools, destroy, update })=> {
           _students.map( student => <li key={student.id}>
             <div><b>{ student.firstName } { student.lastName }</b></div>
             <div>GPA: { student.GPA }</div>
-            <div>attends: { student.schoolId !== null ? student.enrolledAt.name : 'Not enrolled'}</div>
+            <div>attends: { student.enrolledAt !== undefined ? student.enrolledAt.name : 'Not enrolled'}</div>
             <form>
               <select onChange={ (ev)=> {
-                //console.log('student before change', student);
-                if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
-                  update({ ...student, schoolId: ev.target.value })
-                }
-                if (student.id !== undefined && ev.target.value === 'notEnrolled') {
-                  update({ ...student, schoolId: null })
+                console.log('student before change', student);
+                if (student.id !== undefined){
+                  if( ev.target.value === 'notEnrolled'){
+                    update({ ...student, schoolId: null })
+                  }
+                  else {
+                    update({ ...student, schoolId: ev.target.value })
+                  }
                 }
               }}>
                 <option value={null}>--Select School--</option>

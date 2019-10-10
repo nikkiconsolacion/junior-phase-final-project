@@ -4,7 +4,7 @@ import { deleteStudent, updateStudent } from './store';
 
 const _School = ({ schools, students, match, destroy, update, unenrolledStudents })=> {
   const schoolId = match.params.id
-  let school;
+  // let school;
 
   if (schools.length === 0) {
     return (
@@ -12,11 +12,11 @@ const _School = ({ schools, students, match, destroy, update, unenrolledStudents
     );
   }
   else {
-    school = schools.find( school => school.id === schoolId);
-    const _students = students.filter( student => student.schoolId === school.id);
+    const school = schools.find( _school => _school.id === schoolId);
+    const enrolledStudents = students.filter( student => student.schoolId === school.id);
     return (
       <div>
-        <h3>{school.name} ({ _students.length } Students enrolled)</h3>
+        <h3>{school.name} ({ enrolledStudents.length } Students enrolled)</h3>
         <form>
           <select onChange={ (ev)=> {
             const student = students.find(student => student.id === ev.target.value);
@@ -31,12 +31,12 @@ const _School = ({ schools, students, match, destroy, update, unenrolledStudents
         </form>
         <ul className='tiles'>
           {
-            _students.map( student => <li key={student.id}>
+            enrolledStudents.map( student => <li key={student.id}>
               <div><b>{ student.firstName } { student.lastName }</b></div>
               <div>GPA: { student.GPA }</div>
               <form>
                 <select onChange={ (ev)=> {
-                  //console.log('student before change', student);
+                  console.log('student before change', student);
                   if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
                     update({ ...student, schoolId: ev.target.value })
                   }
@@ -62,6 +62,7 @@ const _School = ({ schools, students, match, destroy, update, unenrolledStudents
 
 const mapStateToProps = ({ schools, students })=> {
   const unenrolledStudents = students.filter( student => student.schoolId === null);
+  console.log('unenrolledStudents in mapStateToProps', unenrolledStudents);
   return {
     schools,
     students,
