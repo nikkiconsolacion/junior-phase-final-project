@@ -40,7 +40,7 @@ const _School = ({ schools, students, match, destroy, update, unenrolledStudents
                   if (student.id !== undefined && student.schoolId !== 'notEnrolled') {
                     update({ ...student, schoolId: ev.target.value })
                   }
-                  if (student.id !== undefined && ev.target.value === 'notEnrolled') {
+                  else if (student.id !== undefined && ev.target.value === 'notEnrolled') {
                     update({ ...student, schoolId: null })
                   }
                 }}>

@@ -56,18 +56,23 @@ app.get('/api/students/:id', async(req, res, next)=> {
 });
 
 app.put('/api/students/:id', async(req, res, next)=> {
-  // const student = await Student.findByPk(req.params.id);
-  // Student.update(student, req.body)
-  //   .then( student => res.status(200).send(student))
-  //   .catch(next)
+
+  //instance method:
+
   const student = await Student.findByPk(req.params.id);
-  try {
-    const updatedStudent = await Student.update(req.body, { where: { id: req.params.id }, returning: true });
-    res.send(updatedStudent);
-  }
-  catch(ex) {
-    next(ex);
-  }
+
+  student.update(req.body)
+    .then( updatedStudent => res.status(200).send(updatedStudent))
+    .catch(next)
+
+  //model method: (good if we're updating multiple instances, but in this case we're not)
+  // try {
+  //   const updatedStudent = await Student.update(req.body, { where: { id: req.params.id }, returning: true });
+  //   res.send(updatedStudent);
+  // }
+  // catch(ex) {
+  //   next(ex);
+  // }
 });
 
 app.delete('/api/students/:id', (req, res, next)=> {

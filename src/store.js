@@ -107,8 +107,10 @@ const deleteStudent = (student)=> {
 const updateStudent = (student)=> {
   return async(dispatch)=> {
     console.log('student after change in thunks', student)
-    const updatedStudent = (await axios.put(`/api/students/${student.id}`, student)).data[1][0];
-    console.log('updated student in thunks', updatedStudent)
+    // const updatedStudent = (await axios.put(`/api/students/${student.id}`, student)).data[1][0]; //needed if we used model method in app.put()
+    const updatedStudent = (await axios.put(`/api/students/${student.id}`, student)).data;
+
+    console.log('updatedStudent in thunk', updatedStudent)
     return dispatch(_updateStudent(updatedStudent));
   }
 }
