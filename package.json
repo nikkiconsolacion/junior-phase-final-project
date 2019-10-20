@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --watch --mode=development",
-    "postinstall": "webpack",
-    "start:dev": "npm run webpack & nodemon server.js --ignore dist/ --ignore src/"
+    "webpack": "webpack",
+    "postinstall": "npm run webpack",
+    "start:dev": "npm run webpack --watch --mode=development & nodemon server.js --ignore dist/ --ignore src/"
   },
   "keywords": [],
   "author": "",
