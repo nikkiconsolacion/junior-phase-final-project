@@ -20,6 +20,7 @@ const _Home = ({ _schoolsWithGPA, popularSchool, maxEnrolled, topSchool })=> {
 }
 
 const mapStateToProps = ({ schools, students })=> {
+  console.log('students', students);
   //find students enrolled at each school and average GPA
   const _schools = schools.map( school => {
     const _students = students.filter( student => student.schoolId === school.id);
